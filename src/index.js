@@ -41,6 +41,7 @@ function getEmbedHTML(template, styles, opts = {}) {
 
 	return getExternalStyleSheets(styles, fetch)
 		.then(styleSheets => {
+			debugger
 			embedHTML = styles.reduce((html, styleSrc, i) => {
 				html = html.replace(genLinkReplaceSymbol(styleSrc), isInlineCode(styleSrc) ? `${styleSrc}` : `<style>/* ${styleSrc} */${styleSheets[i]}</style>`);
 				return html;
@@ -76,6 +77,7 @@ function getExecutableScript(scriptSrc, scriptText, opts = {}) {
 // for prefetch
 export function getExternalStyleSheets(styles, fetch = defaultFetch) {
 	return Promise.all(styles.map(styleLink => {
+		debugger
 			if (isInlineCode(styleLink)) {
 				// if it is inline style
 				return getInlineCode(styleLink);
@@ -167,6 +169,9 @@ export function execScripts(entry, scripts, proxy = window, opts = {}) {
 		.then(scriptsText => {
 
 			const geval = (scriptSrc, inlineScript) => {
+
+				debugger
+
 				const rawCode = beforeExec(inlineScript, scriptSrc) || inlineScript;
 				const code = getExecutableScript(scriptSrc, rawCode, { proxy, strictGlobal, scopedGlobalVariables });
 
@@ -280,6 +285,7 @@ export default function importHTML(url, opts = {}) {
 
 			const assetPublicPath = getPublicPath(url);
 			const { template, scripts, entry, styles } = processTpl(getTemplate(html), assetPublicPath, postProcessTemplate);
+			debugger
 
 			return getEmbedHTML(template, styles, { fetch }).then(embedHTML => ({
 				template: embedHTML,
@@ -287,6 +293,7 @@ export default function importHTML(url, opts = {}) {
 				getExternalScripts: () => getExternalScripts(scripts, fetch),
 				getExternalStyleSheets: () => getExternalStyleSheets(styles, fetch),
 				execScripts: (proxy, strictGlobal, opts = {}) => {
+					debugger
 					if (!scripts.length) {
 						return Promise.resolve();
 					}

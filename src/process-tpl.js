@@ -191,6 +191,7 @@ export default function processTpl(tpl, baseURI, postProcessTemplate) {
 				return inlineScriptReplaceSymbol;
 			}
 		});
+		debugger
 
 	scripts = scripts.filter(function (script) {
 		// filter empty script
