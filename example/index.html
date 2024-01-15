@@ -5,16 +5,23 @@
 	<title>index</title>
 </head>
 <body>
-<script src="../dist/import-html-entry.js"></script>
-<script>
-
+<!-- <script src="../src/index.js" type="module"></script> -->
+<script type="module">
+	import importHTML from '../src/index.js'
+	window.process = {
+		env: 'production'
+	}
 	importHTML('./template.html').then(res => {
-		console.log(res.template);
+		const template = res.template
+		document.getElementById('template').innerHTML = template
 		res.execScripts().then(exports => {
-			console.log(exports);
+			console.log(222,exports);
 		});
 	});
 
 </script>
+
+<div id="template"></div>
+<div id="a"></div>
 </body>
 </html>

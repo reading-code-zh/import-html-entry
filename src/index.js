@@ -4,7 +4,7 @@
  * @since 2018-08-15 11:37
  */
 
-import processTpl, { genLinkReplaceSymbol, genScriptReplaceSymbol } from './process-tpl';
+import processTpl, { genLinkReplaceSymbol, genScriptReplaceSymbol } from './process-tpl.js';
 import {
 	defaultGetPublicPath,
 	evalCode,
@@ -13,7 +13,7 @@ import {
 	noteGlobalProps,
 	readResAsString,
 	requestIdleCallback,
-} from './utils';
+} from './utils.js';
 
 const styleCache = {};
 const scriptCache = {};
@@ -249,6 +249,7 @@ export function execScripts(entry, scripts, proxy = window, opts = {}) {
 }
 
 export default function importHTML(url, opts = {}) {
+	debugger
 	let fetch = defaultFetch;
 	let autoDecodeResponse = false;
 	let getPublicPath = defaultGetPublicPath;

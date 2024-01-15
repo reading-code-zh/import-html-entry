@@ -3,7 +3,7 @@
  * @homepage https://github.com/kuitos/
  * @since 2018-09-03 15:04
  */
-import { getInlineCode, isModuleScriptSupported, parseUrl } from './utils';
+import { getInlineCode, isModuleScriptSupported, parseUrl } from './utils.js';
 
 const ALL_SCRIPT_REGEX = /(<script[\s\S]*?>)[\s\S]*?<\/script>/gi;
 const SCRIPT_TAG_REGEX = /<(script)\s+((?!type=('|")text\/ng-template\3).)*?>.*?<\/\1>/is;
@@ -58,6 +58,8 @@ export const genModuleScriptReplaceSymbol = (scriptSrc, moduleSupport) => `<!-- 
  * @returns {{template: void | string | *, scripts: *[], entry: *}}
  */
 export default function processTpl(tpl, baseURI, postProcessTemplate) {
+
+	debugger
 
 	let scripts = [];
 	const styles = [];
